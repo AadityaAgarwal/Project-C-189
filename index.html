@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="./index.js"></script>
+</head>
+
+<body>
+
+    <a-scene id="scene" aframe-inspector-plugin-recast wasd-controls=disabled> 
+
+        <!-- Assets -->
+        <a-assets>
+            <a-asset-item id="road" src="./assets/american_road/scene.gltf">
+                </a-asset>
+                <a-asset-item id="bike" src="./assets/motorcycle_-_custom_bike_jawa_low-poly/scene.gltf"></a-asset-item>
+                <a-asset-item id="city" src="./assets/city/scene.gltf"></a-asset-item>
+                <audio src="./assets/bike_audio.mp3" id="bike_sound"></audio>
+        </a-assets>
+
+        <!-- environment -->
+        <!-- <a-entity id="environment" environment="preset:default;skyType:gradient;lightning:point"></a-entity> -->
+
+        <!-- sound -->
+        <a-entity id="sound_bike" sound="src:#bike_sound;autoplay:false;volume:10;loop:false;poolSize:2"></a-entity>
+        <!-- light -->
+        <a-entity light="type:ambient;color:white;intensity:2;"></a-entity>
+        <a-entity light="type:directional;color:yellow;intesity:2;position:0 15 15"></a-entity>
+        <!-- Adding the road -->
+        <a-entity position="0 -20 -10" scale="1 1 1" gltf-model="#city" id="City" rotation="0 0 0"></a-entity>
+        
+        <!-- camera -->
+        <a-entity id="camera-controls" movement-controls="speed:0.5" position="0 0.7 -14" rotation="0 90 0" bike timer>
+            <a-entity id="camera" camera position="10 -19 0" rotation="0 0 0" look-controls="pointerLockEnabled:false">
+               <!-- Text -->
+               <a-entity id="timer_text" position="5 5 -7.1"  text="font: monoid;width:10; height: 5; value: Timer:;color:black">
+                <a-entity id="counter" position="2 0 0" timer text="font: monoid; width:10; height: 5; value:00:00;color:black"></a-entity>
+              </a-entity>
+
+                <!-- adding bike -->
+                <a-entity id="bike_entity" gltf-model="#bike" position="0 -0.2 -0.1" scale="0.1 0.1 0.1"
+                    rotation="0 -95 0"></a-entity>
+            </a-entity>
+
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
